@@ -1,0 +1,83 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+  <meta charset="UTF-8">
+  <title>Date Invitation</title>
+  <style>
+    body {
+      font-family: 'Arial', sans-serif;
+      text-align: center;
+      background: linear-gradient(to right, #ff9a9e, #fad0c4);
+      height: 100vh;
+      display: flex;
+      flex-direction: column;
+      justify-content: center;
+      align-items: center;
+    }
+    h1 {
+      color: #fff;
+      font-size: 2.5em;
+      margin-bottom: 20px;
+    }
+    button {
+      padding: 15px 30px;
+      font-size: 1.2em;
+      margin: 10px;
+      border: none;
+      border-radius: 8px;
+      cursor: pointer;
+      transition: 0.3s;
+    }
+    #yes {
+      background-color: #ff6f61;
+      color: white;
+    }
+    #no {
+      background-color: #444;
+      color: white;
+      position: absolute;
+    }
+    .message {
+      margin-top: 20px;
+      font-size: 1.2em;
+      color: #fff;
+    }
+  </style>
+</head>
+<body>
+  <h1>Will you go on a date with me? ❤️</h1>
+  <button id="yes">Yes</button>
+  <button id="no">No</button>
+  <div class="message" id="message"></div>
+
+  <script>
+    const noBtn = document.getElementById('no');
+    const yesBtn = document.getElementById('yes');
+    const message = document.getElementById('message');
+
+    const compliments = [
+      "But I make you laugh 😄",
+      "You know I’m your favorite 😉",
+      "I’ll always be there for you ❤️",
+      "We’re perfect together ✨",
+      "You can’t resist me 😘"
+    ];
+
+    let complimentIndex = 0;
+
+    noBtn.addEventListener('mouseover', () => {
+      const x = Math.random() * (window.innerWidth - 100);
+      const y = Math.random() * (window.innerHeight - 50);
+      noBtn.style.left = x + 'px';
+      noBtn.style.top = y + 'px';
+      message.textContent = compliments[complimentIndex];
+      complimentIndex = (complimentIndex + 1) % compliments.length;
+    });
+
+    yesBtn.addEventListener('click', () => {
+      message.textContent = "Yay! 🎉 Can’t wait to see you!";
+      document.body.style.background = "linear-gradient(to right, #a1c4fd, #c2e9fb)";
+    });
+  </script>
+</body>
+</html>
