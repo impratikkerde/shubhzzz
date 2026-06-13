@@ -1,0 +1,123 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+  <meta charset="UTF-8">
+  <title>Date Invitation</title>
+  <link href="https://fonts.googleapis.com/css2?family=Great+Vibes&family=Poppins:wght@400;600&display=swap" rel="stylesheet">
+  <style>
+    body {
+      margin: 0;
+      font-family: 'Poppins', sans-serif;
+      text-align: center;
+      background: linear-gradient(-45deg, #ff9a9e, #fad0c4, #fbc2eb, #a6c1ee);
+      background-size: 400% 400%;
+      animation: gradientBG 15s ease infinite;
+      height: 100vh;
+      display: flex;
+      flex-direction: column;
+      justify-content: center;
+      align-items: center;
+      overflow: hidden;
+    }
+    @keyframes gradientBG {
+      0% {background-position: 0% 50%;}
+      50% {background-position: 100% 50%;}
+      100% {background-position: 0% 50%;}
+    }
+    h1 {
+      font-family: 'Great Vibes', cursive;
+      font-size: 3em;
+      color: #fff;
+      margin-bottom: 20px;
+    }
+    button {
+      padding: 15px 30px;
+      font-size: 1.2em;
+      margin: 10px;
+      border: none;
+      border-radius: 8px;
+      cursor: pointer;
+      transition: transform 0.3s, background-color 0.3s;
+    }
+    #yes {
+      background-color: #ff6f61;
+      color: white;
+    }
+    #yes:hover {
+      transform: scale(1.1);
+      background-color: #ff3b2e;
+    }
+    #no {
+      background-color: #444;
+      color: white;
+      position: absolute;
+    }
+    .popup {
+      position: absolute;
+      background: rgba(255,255,255,0.9);
+      padding: 10px 15px;
+      border-radius: 10px;
+      font-size: 1em;
+      color: #333;
+      animation: fadeUp 2s ease forwards;
+    }
+    @keyframes fadeUp {
+      from {opacity: 0; transform: translateY(20px);}
+      to {opacity: 1; transform: translateY(-20px);}
+    }
+    canvas {
+      position: fixed;
+      top: 0;
+      left: 0;
+      width: 100%;
+      height: 100%;
+      pointer-events: none;
+    }
+  </style>
+</head>
+<body>
+  <h1>Will you go on a date with me? ❤️</h1>
+  <button id="yes">Yes</button>
+  <button id="no">No</button>
+  <canvas id="confetti"></canvas>
+
+  <script src="https://cdn.jsdelivr.net/npm/canvas-confetti@1.6.0/dist/confetti.browser.min.js"></script>
+  <script>
+    const noBtn = document.getElementById('no');
+    const yesBtn = document.getElementById('yes');
+    const compliments = [
+      "But I make you laugh 😄",
+      "You know I’m your favorite 😉",
+      "I’ll always be there for you ❤️",
+      "We’re perfect together ✨",
+      "You can’t resist me 😘"
+    ];
+    let complimentIndex = 0;
+
+    noBtn.addEventListener('mouseover', () => {
+      const x = Math.random() * (window.innerWidth - 100);
+      const y = Math.random() * (window.innerHeight - 50);
+      noBtn.style.left = x + 'px';
+      noBtn.style.top = y + 'px';
+
+      const popup = document.createElement('div');
+      popup.className = 'popup';
+      popup.textContent = compliments[complimentIndex];
+      complimentIndex = (complimentIndex + 1) % compliments.length;
+      document.body.appendChild(popup);
+      popup.style.left = (x + 50) + 'px';
+      popup.style.top = (y - 30) + 'px';
+      setTimeout(() => popup.remove(), 2000);
+    });
+
+    yesBtn.addEventListener('click', () => {
+      confetti({
+        particleCount: 150,
+        spread: 70,
+        origin: { y: 0.6 }
+      });
+      alert("Yay! 🎉 Can’t wait to see you!");
+    });
+  </script>
+</body>
+</html>
